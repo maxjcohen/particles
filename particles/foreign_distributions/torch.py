@@ -17,6 +17,8 @@ class TorchModifiedDist(ProbDist):
             return torch.Size((size,))
 
     def rvs(self, size=None):
+        if len(self.torch_dist.batch_shape) > 0:
+            size = None
         return self.torch_dist.sample(self.shape(size)).squeeze()
 
     def logpdf(self, x):

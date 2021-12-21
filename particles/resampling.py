@@ -220,7 +220,7 @@ class Weights(object):
             s = w.sum()
             self.log_mean = m + np.log(s / self.N)
             self.W = w / s
-            self.ESS = 1. / np.sum(self.W ** 2)
+            self.ESS = 1. / (self.W ** 2).sum()
 
     @property
     def N(self):

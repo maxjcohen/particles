@@ -29,4 +29,15 @@ true_states, data = my_model.simulate(100)
 
 plt.style.use("ggplot")
 plt.plot(data)
+
+fk_model = ssm.Bootstrap(ssm=my_model, data=data)  # we use the Bootstrap filter
+pf = particles.SMC(fk=fk_model, N=100, resampling='stratified',
+                   collect=[Moments()], store_history=True)  # the algorithm
+pf.run()  # actual computation
+
+# plot
+plt.figure()
+plt.plot([yt**2 for yt in data], label='data-squared')
+plt.plot([m['mean'] for m in pf.summaries.moments], label='filtered volatility')
+plt.legend()
 plt.show()

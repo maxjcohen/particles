@@ -19,6 +19,10 @@ class TorchModifiedDist(ProbDist):
     def rvs(self, size=None):
         return self.torch_dist.sample(self.shape(size)).squeeze()
 
+    def logpdf(self, x):
+        import pdb;pdb.set_trace()
+        return self.torch_dist.log_prob(x)
+
 
 def torch_distribution(torch_dist):
     def law(*args, **kwargs):

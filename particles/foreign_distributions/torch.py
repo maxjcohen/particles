@@ -20,7 +20,6 @@ class TorchModifiedDist(ProbDist):
         return self.torch_dist.sample(self.shape(size)).squeeze()
 
     def logpdf(self, x):
-        import pdb;pdb.set_trace()
         return self.torch_dist.log_prob(x)
 
 
